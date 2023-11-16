@@ -1,0 +1,12 @@
+[submodule "tetrio-api"]
+	path = tetrio-api
+	url = https://github.com/Takathediscordbot/tetrio-api
+[submodule "taka_the_discord_bot_client"]
+	path = taka_the_discord_bot_client
+	url = https://github.com/Takathediscordbot/taka_the_discord_bot_client.git
+[submodule "taka_the_discord_bot_tetrio_html_server"]
+	path = taka_the_discord_bot_tetrio_html_server
+	url = https://github.com/Takathediscordbot/taka_the_discord_bot_tetrio_html_server.git
+[submodule "taka_the_discord_bot_common"]
+	path = taka_the_discord_bot_common
+	url = https://github.com/Takathediscordbot/taka_the_discord_bot_common.git

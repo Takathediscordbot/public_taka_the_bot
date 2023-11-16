@@ -1,0 +1,100 @@
+version: '3.2'
+services:
+  taka_the_discord_bot_nginxproxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    networks:
+      - taka_the_discord_bot_client_network
+      - taka_the_discord_bot_tetrio_html_server_network
+      - taka_the_discord_bot_status_network
+
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    volumes_from:
+      - taka_the_discord_bot_nginxproxy
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
+    environment:
+      - DEFAULT_EMAIL=takathedinosaur@gmail.com
+  taka_the_discord_bot_status:
+    build: ./taka_the_discord_bot_status
+    image: taka_the_discord_bot_status
+    depends_on:
+      - taka_the_discord_bot_dependencies
+    networks:
+      - taka_the_discord_bot_status_network
+    environment:
+      - VIRTUAL_HOST=health.takathedinosaur.tech
+      - LETSENCRYPT_HOST=health.takathedinosaur.tech
+      - VIRTUAL_PORT=8080
+    volumes: 
+      - ./taka_the_discord_bot_status:/var/www/taka_the_discord_bot_status
+  taka_the_discord_bot_dependencies:
+    image: taka_the_discord_bot_dependencies
+    build: ./
+  taka_the_discord_bot_tetrio_html_server:
+    build: ./taka_the_discord_bot_tetrio_html_server
+    image: taka_the_discord_bot_tetrio_html_server    
+    volumes:
+      - ./taka_the_discord_bot_tetrio_html_server/assets:/taka_the_discord_bot_tetrio_html_server/assets
+    environment:
+      - VIRTUAL_HOST=htmlserver.takathedinosaur.tech
+      - LETSENCRYPT_HOST=htmlserver.takathedinosaur.tech
+      - VIRTUAL_PORT=8080
+    depends_on:
+      - taka_the_discord_bot_dependencies
+    networks:
+      - taka_the_discord_bot_tetrio_html_server_network
+  taka_the_discord_bot_client:
+    build: ./taka_the_discord_bot_client
+    image: taka_the_discord_bot_client
+    environment:
+      - VIRTUAL_HOST=bot.takathedinosaur.tech
+      - LETSENCRYPT_HOST=bot.takathedinosaur.tech
+      - VIRTUAL_PORT=8080
+
+    volumes:
+      - taka_the_discord_bot_client_chrome:/root/.local/share/headless-chrome/
+      - ./assets/taka_the_discord_bot_client:/taka_the_discord_bot_client/assets
+      - ./conversations:/taka_the_discord_bot_client/conversations
+
+
+    links: 
+      - taka_the_discord_bot_tetrio_html_server
+    external_links:
+      - taka_the_discord_bot_database
+    depends_on:
+      - taka_the_discord_bot_dependencies
+      - taka_the_discord_bot_tetrio_html_server
+    networks:
+      - taka_the_discord_bot_client_network
+      - taka_the_discord_bot_db_network
+      - taka_the_discord_bot_tetrio_html_server_network  
+networks: 
+  taka_the_discord_bot_status_network: 
+    name: taka_the_discord_bot_status_network
+  taka_the_discord_bot_client_network:
+    name: taka_the_discord_bot_client_network
+  taka_the_discord_bot_tetrio_html_server_network:
+    name: taka_the_discord_bot_tetrio_html_server_network
+  taka_the_discord_bot_db_network:
+    name: taka_the_discord_bot_db_network
+    external: true
+volumes:
+  taka_the_discord_bot_client_chrome:
+    name: taka_the_discord_bot_client_chrome
+  acme:
+    name: taka_the_discord_bot_acme
+  certs:
+    name: taka_the_discord_bot_certs
+  vhost:
+    name: taka_the_discord_bot_vhost
+  html:
+    name: taka_the_discord_bot_html

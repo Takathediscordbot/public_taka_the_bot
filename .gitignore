@@ -1,0 +1,9 @@
+/target
+taka_the_discord_bot_client/.env
+taka_the_discord_bot_tetrio_html_server/.env
+taka_the_discord_bot_tetrio_common/.env
+taka_the_discord_bot_database/.env
+hun2.ttf
+.vscode
+.env
+./assets
