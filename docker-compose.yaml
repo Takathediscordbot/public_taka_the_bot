@@ -1,32 +1,32 @@
 version: '3.2'
 services:
-  taka_the_discord_bot_nginxproxy:
-    image: jwilder/nginx-proxy
-    ports:
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - certs:/etc/nginx/certs
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-    networks:
-      - taka_the_discord_bot_client_network
-      - taka_the_discord_bot_tetrio_html_server_network
-      - taka_the_discord_bot_status_network
-
-  nginx-proxy-acme:
-    image: nginxproxy/acme-companion
-    volumes_from:
-      - taka_the_discord_bot_nginxproxy
+  taka_the_discord_bot_nginxproxy: 
+    image: jwilder/nginx-proxy 
+    ports: 
+      - 443:443 
     volumes: 
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - acme:/etc/acme.sh
-    environment:
-      - DEFAULT_EMAIL=takathedinosaur@gmail.com
-  taka_the_discord_bot_status:
-    build: ./taka_the_discord_bot_status
-    image: taka_the_discord_bot_status
-    depends_on:
+      - /var/run/docker.sock:/tmp/docker.sock:ro 
+      - certs:/etc/nginx/certs 
+      - vhost:/etc/nginx/vhost.d 
+      - html:/usr/share/nginx/html 
+    networks: 
+      - taka_the_discord_bot_client_network 
+      - taka_the_discord_bot_tetrio_html_server_network 
+      - taka_the_discord_bot_status_network 
+
+  nginx-proxy-acme: 
+    image: nginxproxy/acme-companion 
+    volumes_from: 
+      - taka_the_discord_bot_nginxproxy 
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock:ro 
+      - acme:/etc/acme.sh 
+    environment: 
+      - DEFAULT_EMAIL=takathedinosaur@gmail.com 
+  taka_the_discord_bot_status: 
+    build: ./taka_the_discord_bot_status 
+    image: taka_the_discord_bot_status 
+    depends_on: 
       - taka_the_discord_bot_dependencies
     networks:
       - taka_the_discord_bot_status_network
