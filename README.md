@@ -73,7 +73,8 @@ This will define which features the bot will compile with. Each features have th
 the database feature flag requires a DATABASE_URL environment variable to exist which should point to a postgres database which you can setup with the scripts in the taka_the_discord_bot_database folder; the html_server_image_generation requires a HTML_SERVER_URL environment to exist and to run the server in taka_the_discord_bot_tetrio_html_server; and finally the ai feature flag requires you to set AI_CHANNEL, a channel in which users can create threads to speak to the bot, and
 OPENAI_TOKEN which should be a api key giving access to GPT 3.5-turbo.
 
-Besides feature specific environment variables, the bot also requires a DISCORD_TOKEN environment to connect as a discord bot and a TEST_GUILD environment variable to set which server the bot can create commands in. So far the bot can only work in one discord server at a time, until a future update.
+Besides feature specific environment variables, the bot also requires a DISCORD_TOKEN environment to connect as a discord bot and a TEST_GUILD environment variable to set which server the bot can create commands in. A AUTHOR_ID also has to be set to access functionalities that are locked only to the creator of the bot.
+ So far the bot can only work in one discord server at a time, until a future update.
 
 
 
