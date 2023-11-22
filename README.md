@@ -8,10 +8,14 @@ It was also made in all parts (excluding third-party libraries) by me, @takathed
 
 This bot is honestly quite versatile in its functionalities, it has a lot of very niche functionalities that you wouldn't normally find in a lot of discord bot, all assembled together. It currently does not have moderation functionalities, but that will probably come in a *future* update. I keep this bot updated all by myself so development can be quite slow.
 For now though here's a list of functionalities:
-    - Silly commands (Commands that send gifs, which are all stored in a database making them easy to create for the current holder of the bot.)
-    - Tetrio Stats Commands, heavily inspired from [Sheetbot](https://github.com/Kerrmunism/sheetBot). The functionalities are pretty much the same with some added quirks like calculating stats from tetra league replays.
-    - Tetrio Image Rendering, heavily inspired by [Hiyajo Maho](https://discord.com/api/oauth2/authorize?client_id=484558503545929729&permissions=0&scope=bot%20applications.commands). The images are rendered directly from the web making the results a little more accurate to the real website, and replay/profile urls are provided with the image renders to make them more easily accessible. 
-    - AI Conversations, currently the bot has its own personality using GPT-3.5 to generate responses to messages. Its access is limited to a specific discord channel to not have the bot interacting literally everwhere.
+
+- Silly commands (Commands that send gifs, which are all stored in a database making them easy to create for the current holder of the bot.)
+
+- Tetrio Stats Commands, heavily inspired from [Sheetbot](https://github.com/Kerrmunism/sheetBot). The functionalities are pretty much the same with some added quirks like calculating stats from tetra league replays.
+
+- Tetrio Image Rendering, heavily inspired by [Hiyajo Maho](https://discord.com/api/oauth2/authorize?client_id=484558503545929729&permissions=0&scope=bot%20applications.commands). The images are rendered directly from the web making the results a little more accurate to the real website, and replay/profile urls are provided with the image renders to make them more easily accessible. 
+    
+- AI Conversations, currently the bot has its own personality using GPT-3.5 to generate responses to messages. Its access is limited to a specific discord channel to not have the bot interacting literally everwhere.
 
 Everything in the bot uses slash commands, appart from AI interactions which require the actual messages to respond.
 In a *future* update I might lock the access to the AI behind slash commands, but I'd rather not do that to keep conversations more natural.
